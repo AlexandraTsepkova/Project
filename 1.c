@@ -4,6 +4,8 @@
 #define LEN 40
 void menu(){
 	int x; FILE*f; int k; char a[MAX][LEN];
+	int n=0, i;
+	char*a[12];
 	printf ("выберите категорию:\n");
 	printf ("наука --1\nживотные --2\nрастения --3\nспорт --4\n");
 	scanf ("%d",&x);
@@ -30,6 +32,10 @@ void menu(){
 			fgets(a[i][j],len,f);
 		}
 	}	
+i=1+rand()%20;
+while(i<=x){
+fscanf(f,"%s",a);}
+return a;
 }
 
 int mystrlen(FILE**f){
@@ -39,6 +45,7 @@ int mystrlen(FILE**f){
 		if ((int)a==32) return len;
 	}
 }
+
 
 int main(){
 	menu;
