@@ -1,9 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
-#define MAX 20
-#define LEN 40
 void menu(){
-	int x; FILE*f; int k; char a[MAX][LEN];
+	int x; FILE*f;
 	int n=0, i;
 	char*a[12];
 	printf ("выберите категорию:\n");
@@ -26,24 +24,11 @@ void menu(){
 		printf("error"); 
 		return; 
 	}
-	for(i=0;i<MAX;i++){
-		len=mystrlen(&f);
-		for(j=0;j<l;j++){
-			fgets(a[i][j],len,f);
+	i=1+rand()%20;
+	while(i<=x){
+		fscanf(f,"%s",a);
 		}
-	}	
-i=1+rand()%20;
-while(i<=x){
-fscanf(f,"%s",a);}
-return a;
-}
-
-int mystrlen(FILE**f){
-	int len=0; char a;
-	while(fscanf("%c", a)==1){
-		len++;
-		if ((int)a==32) return len;
-	}
+	return a;
 }
 
 
