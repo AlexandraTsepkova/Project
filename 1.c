@@ -49,7 +49,7 @@ char* menu(){
 
 void game(char *a) {  //передаем нашу строку со словом
 
-	int num, i, n=0, k=0; int try=7; char* used[33]; char letter; //n-счетчик для used, used - уже использованные буквы, letter - буква для считывания
+	int num, i, v=0, n=0, k=0, w; int try=7; char* used[33]; char letter; //v- четчик файла; n-счетчик для used, used - уже использованные буквы, letter - буква для считывания
 	num=strlen(a);
 	char* b[num]; //массив который мы печатаем
 	struct word * word;
@@ -72,17 +72,43 @@ void game(char *a) {  //передаем нашу строку со словом
 	    scanf("%c", &letter);
 		used[n]=letter;
 		n++;
-		
+		w=search(word, letter);
+		if(w==-1){try--;
+		CHELprint(v);
+		v++;		
+		}
 	}
 }
-struct bukva* tree(char* a){
-	
-	
-	
-	
+void CHELprint(int v){FILE*f;
+	if (v== 0){f=fopen("0.txt", "r");}
+	if (v== 1){f=fopen("1.txt", "r");}
+	if (v== 2){f=fopen("2.txt", "r");}
+	if (v== 3){f=fopen("3.txt", "r");}
+	if (v== 4){f=fopen("4.txt", "r");}
+	if (v== 5){f=fopen("5.txt", "r");}
+	if (v== 6){f=fopen("6.txt", "r");}
+	if (v== 7){f=fopen("7.txt", "r");}
 	
 }
+int search(struct word*word, char letter){
+	
+	int k =(int)letter;
+	struct bukva * cur=word->root;
+	struct  bukva* res;
+	res=searchNode(cur,k);
+	if(res==NULL){return -1;}
+	else return res->num;
+}
 
+struct bukva*searchNode(struct bukva*cur, int val){
+	
+	struct bukva*res=NULL;
+	if(cur==NULL){return NULL;}
+	else if(val>cur->val){res=searchNode(cur->right,val)}
+	else if (val<cur->val){res=searchNode(cur->left,val)}
+	else {return cur;};
+	return res;
+}
 void treeAdd (struct word *word, char n, int num) {
 	
 	struct TreeNode *cur = (*word).root;
