@@ -13,11 +13,26 @@ struct bukva{
 struct word{
 	struct bukva* root;
 };
-
+char* menu();
+void CHELprint(int v);
+int search(struct word*word, char letter);
+struct bukva* searchNode(struct bukva* cur, int val);
+void treeAdd (struct word *word, char n, int num);
+void printword(char* a, int num);
+void game(char *a);
+int my_strlen(char* a);
+int main(){
+	
+	char* word;
+	word=menu();
+	game(word);
+	return 0;
+}
 char* menu(){
+
 	int x; FILE*f;
 	int n=0, i;
-	char*a[12];
+	char* a[12];
 	char*c[12];
 	printf ("выберите категорию:\n");
 	printf ("наука --1\nживотные --2\nрастения --3\nспорт --4\n");
@@ -34,10 +49,6 @@ char* menu(){
 	if(x==4) {
 		f=fopen("sport.txt", "r");
 	}
-	if (((x<1)||(x>4))||(f==NULL)){
-		printf("error"); 
-		return;
-	}
 	srand(time(0));
 	i=1+rand()%20; 
 	printf("%d\n", i);
@@ -48,9 +59,6 @@ char* menu(){
 		printf("%s", a);
 		return a;
 }
-
-
-
 void CHELprint(int v){FILE*f;//печать человека(++)
 	if (v== 0){f=fopen("0.txt", "r");}
 	if (v== 1){f=fopen("1.txt", "r");}
@@ -66,7 +74,6 @@ void CHELprint(int v){FILE*f;//печать человека(++)
 	}
 	fclose(f);
 }
-
 int search(struct word*word, char letter){
 	
 	int k =(int)letter;
@@ -77,20 +84,20 @@ int search(struct word*word, char letter){
 	else return res->num;
 }
 
-struct bukva*searchNode(struct bukva*cur, int val){
+struct bukva* searchNode(struct bukva* cur, int val){
 	
-	struct bukva*res=NULL;
-	if(cur==NULL){return NULL;}
+	struct bukva* res=NULL;
+	/*if(cur==NULL){return NULL;}
 	else if(val>cur->val){res=searchNode(cur->right,val);}
 	else if (val<cur->val){res=searchNode(cur->left,val);}
 	else {return cur;};
-	return res;
+	*/return res;
 }
 void treeAdd (struct word *word, char n, int num) {
 	
-	struct TreeNode *cur = (*word).root;
-	struct TreeNode **curAdd = &((*word).root);
-	struct TreeNode *node = malloc(sizeof(struct bukva));
+	struct bukva *cur = (*word).root;
+	struct bukva **curAdd = &((*word).root);
+	struct bukva *node = malloc(sizeof(struct bukva));
     int k;
 	
 	k=(int)n;
@@ -122,13 +129,30 @@ void printword(char* a, int num){ //печать слова
 		printf("%c",a[i]);
 	}
 }
-void game(char *a) {  //передаем нашу строку со словом
+int my_strlen(char* a){
+	int count, i;
+	i = 0;
+		printf("2");
+	count = 0;
+	printf("3");
+	while(a[i]!='\0'){
+		count++;
+		i++;
+	}
+	printf("%d",count);
+	return count;
+}
+void game(char * a) {  //передаем нашу строку со словом
 
-	int num, i, v=0, n=0, k=0, w; int try=7; char* used[33]; char letter; //v- cчетчик файла; n-счетчик для used, used - уже использованные буквы, letter - буква для считывания
-	num=strlen(a);
-	char* b[num]; //массив который мы печатаем
+	int num;// i, v=0, n=0, k=0, w; 
+	int try=7;
+	char used[33]; 
+	char letter; //v- cчетчик файла; n-счетчик для used, used - уже использованные буквы, letter - буква для считывания
+	num=my_strlen(a); 
+	printf("%d",num);
+	char b[12]; //массив который мы печатаем
 	struct word * word;
-	word->root=NULL;
+	/*word->root=NULL;
 	
 	while(k<num){
 		treeAdd(word, a[k], k);
@@ -156,11 +180,5 @@ void game(char *a) {  //передаем нашу строку со словом
 		printword(b, num);}
 		printf ("\nUSED:");
 		printword (used,n);
-	}
-}
-int main(){
-	
-	char* word;
-	word=menu;
-	game(word);
+	}*/
 }
